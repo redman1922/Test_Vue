@@ -3,31 +3,31 @@
 </template>
 
 <script>
-    export default {
-        name: 'AddButton',
-        props: ['onClick'],
-        methods: {
-            onBtnClick() {
-                this.onClick('OK')
-            }
+export default {
+    name: 'AddButton',
+
+    methods: {
+        onBtnClick() {
+            this.$emit('show')
         }
     }
+}
 </script>
 
-<style lang="scss">
-    .btn {
-        background-color: cadetblue;
-        border: 1px solid cadetblue;
-        border-radius: 3px;
-        color: white;
-        padding: 7px 25px;
-        display: inline-block;
-        cursor: pointer;
-        transition: 0.3s;
+<style >
+.btn {
+    background-color: cadetblue;
+    border: 1px solid cadetblue;
+    border-radius: 3px;
+    color: white;
+    padding: 7px 25px;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        &:hover {
-            background-color: transparent;
-            color: cadetblue;
-        }
-    }
+.btn:hover {
+    background-color: transparent;
+    color: cadetblue;
+}
 </style>
