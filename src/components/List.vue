@@ -1,48 +1,63 @@
 <template>
-    <div class="costs-list">
-        <slot name="head"></slot>
-        <div v-for="cost in list" v-bind:key="cost.id" class="costs-list-item">
-            <p v-for="(item, key) in cost" v-bind:key="key" class="costs-list-item-txt">{{item}}</p>
+    <ul class="costs-list">
+        <div class="costs-list__title">
+            <span class="costs-list__title-span">#</span>
+            <span class="costs-list__title-span">Date</span>
+            <span class="costs-list__title-span">Category</span>
+            <span class="costs-list__title-span">Value</span>
         </div>
-        <slot name="footer"></slot>
-    </div>
+        <li v-for="cost in list" :key="cost.id" class="costs-list__item">
+            <span v-for="(item, idx) in cost" :key="idx" class="row">{{ item }}</span>
+        </li>
+    </ul>
 </template>
 
 <script>
 export default {
-    name: 'List',
-    props: {
-        list: Array
-    }
-}
+    name: "List",
+
+    mounted() {
+        this.$store.dispatch("loadCosts");
+    },
+
+    computed: {
+        list() {
+            return this.$store.getters.getPaginatedData;
+        },
+    },
+};
 </script>
 
-<style >
+<style scoped >
 .costs-list {
     width: 600px;
-    margin: 0 auto;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
 }
 
-.costs-list-item {
-    height: 60px;
-    border-bottom: 1px solid #444;
+.costs-list__item {
+    height: 50px;
+    border-bottom: 1px solid #000;
     display: flex;
-    justify-content: space-between;
-    text-align: left;
+    justify-content: space-around;
     align-items: center;
 }
 
-.costs-list-item-txt {
+.costs-list__title {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.costs-list__title-span {
     width: 150px;
 }
 
-.costs-list-item-txt:nth-child(3) {
-    text-align: center;
-}
 
-.costs-list-item-txt:nth-child(4) {
+.row {
+    flex-basis: 25%;
+    padding: 8px 16px;
     text-align: center;
 }
 </style>
