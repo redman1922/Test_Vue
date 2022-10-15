@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <nav>
       <router-link to="/">
         <img alt="Vue logo" src="./assets/logo.png" />
@@ -21,6 +22,7 @@
     <router-view :key="$route.fullPath" />
     <List></List>
     <Pagination v-model="this.$store.currentPage"></Pagination>
+
   </div>
 </template>
 
@@ -37,17 +39,20 @@ export default {
     Form,
     List,
     Pagination,
+
   }
 };
 </script>
   
 <style >
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
 }
 
 .nav-costs {
@@ -85,3 +90,4 @@ h3 {
   margin: 0;
 }
 </style>
+
