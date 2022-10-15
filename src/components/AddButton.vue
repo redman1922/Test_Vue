@@ -4,14 +4,13 @@
 
 <script>
 export default {
-    name: 'AddButton',
-
+    name: "AddButton",
     methods: {
         onBtnClick() {
-            this.$emit('show')
-        }
-    }
-}
+            this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
+        },
+    },
+};
 </script>
 
 <style >
