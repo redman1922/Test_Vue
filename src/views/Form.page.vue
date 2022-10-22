@@ -1,8 +1,6 @@
 <template>
   <div class="form">
-    <router-link :to="-1" replace
-      ><div @click="$router.go(-1)" class="closeModal"></div
-    ></router-link>
+    <div @click="$router.go(-1)" class="closeModal"></div>
     <input
       v-model="category"
       :class="{ error: !this.category }"
@@ -26,33 +24,38 @@
       type="text"
       placeholder="Payment Date"
     />
-
-    <div @click="submitData" class="btn">ADD +</div>
+    <div class="btns-form">
+      <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
+      <div
+        v-if="mode === 'add'"
+        ref="getTotalValue"
+        @click="submitData"
+        class="btn"
+      >
+        ADD +
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Form",
-  props: {
-    to: Number,
-  },
+
   data() {
-    console.log(this.$route.params.category);
+    // console.log(this.$route);
+    // console.log(this.$route.fullPath);
+    // console.log(this.$route.name);
     return {
       category: this.$route.params.category,
       value: this.$route.query.value,
-      date: new Date().toLocaleDateString(),
+      date: this.$route.query.date || new Date().toLocaleDateString(),
       error: false,
+      mode: this.$route.params.mode,
     };
   },
 
   methods: {
-    // closeBtnClick() {
-
-    //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
-    // },
-
     submitData() {
       if (this.category && this.date && this.value) {
         // this.category = this.$route.params.category;
@@ -62,20 +65,29 @@ export default {
           id: this.$store.getters.getMaxId + 1,
           date: this.date,
           category: this.category,
-          value: this.value,
+          value: +this.value,
         });
         this.category = "";
         this.value = "";
         this.date = "";
       }
     },
-  },
 
-  computed: {
-    isPopupActive() {
-      return this.$store.getters.getIsPopupActive;
+    onEditClick() {
+      this.$store.commit("editCostsList", {
+        id: +this.$route.query.id,
+        date: this.date,
+        category: this.category,
+        value: +this.value,
+      });
     },
   },
+
+  // computed: {
+  //   isPopupActive() {
+  //     return this.$store.getters.getIsPopupActive;
+  //   },
+  // },
 };
 </script>
 
@@ -143,10 +155,17 @@ export default {
 .closeModal::after {
   transform: rotate(-45deg);
 }
+.btns-form {
+  width: 300px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .btn {
   margin-top: 20px;
-  margin-left: 55%;
+
   background-color: cadetblue;
   border: 1px solid cadetblue;
   border-radius: 3px;

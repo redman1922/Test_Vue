@@ -1,4 +1,4 @@
-# components
+# personal-costs
 
 ## Project setup
 ```
