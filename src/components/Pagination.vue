@@ -1,35 +1,20 @@
 <template>
   <ul class="pagination">
     <li class="pagination-item">
-      <button
-        type="button"
-        @click="onClickFirstPage"
-        :disabled="isInFirstPage"
-        aria-label="Go to first page"
-      >
+      <button type="button" @click="onClickFirstPage" :disabled="isInFirstPage" aria-label="Go to first page">
         First
       </button>
     </li>
 
     <li class="pagination-item">
-      <button
-        type="button"
-        @click="onClickPreviousPage"
-        :disabled="isInFirstPage"
-        aria-label="Go to previous page"
-      >
+      <button type="button" @click="onClickPreviousPage" :disabled="isInFirstPage" aria-label="Go to previous page">
         Previous
       </button>
     </li>
 
     <li v-for="(page, idx) in pages" :key="idx" class="pagination-item">
-      <button
-        type="button"
-        @click="onClickPage(page.name)"
-        :disabled="page.isDisabled"
-        :class="{ active: isPageActive(page.name) }"
-        :aria-label="`Go to page number ${page.name}`"
-      >
+      <button type="button" @click="onClickPage(page.name)" :disabled="page.isDisabled"
+        :class="{ active: isPageActive(page.name) }" :aria-label="`Go to page number ${page.name}`">
         {{ page.name }}
         <!-- <router-link
           class="pagination__link"
@@ -40,23 +25,13 @@
     </li>
 
     <li class="pagination-item">
-      <button
-        type="button"
-        @click="onClickNextPage"
-        :disabled="isInLastPage"
-        aria-label="Go to next page"
-      >
+      <button type="button" @click="onClickNextPage" :disabled="isInLastPage" aria-label="Go to next page">
         Next
       </button>
     </li>
 
     <li class="pagination-item">
-      <button
-        type="button"
-        @click="onClickLastPage"
-        :disabled="isInLastPage"
-        aria-label="Go to last page"
-      >
+      <button type="button" @click="onClickLastPage" :disabled="isInLastPage" aria-label="Go to last page">
         Last
       </button>
     </li>

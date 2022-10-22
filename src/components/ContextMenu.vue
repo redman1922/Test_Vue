@@ -1,8 +1,8 @@
 <template>
   <div class="form" v-if="isShown" :style="{top: y + 'px', left: x + 'px'}">
     <div @click="onCloseClick" class="closeModal"></div>
-    <span @click="onEditClick">Редактировать</span>
-    <span @click="removeCosts">Удалить</span>
+    <span @click="onEditClick">&#128393;Редактировать</span>
+    <span @click="removeCosts">&#128722; Удалить</span>
   </div>
 </template>
 

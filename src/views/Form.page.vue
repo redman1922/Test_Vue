@@ -1,47 +1,28 @@
 <template>
   <div class="form">
-    <router-link :to="-1" replace
-      ><div @click="$router.go(-1)" class="closeModal"></div
-    ></router-link>
-    <input
-      v-model="category"
-      :class="{ error: !this.category }"
-      class="form-input description"
-      type="text"
-      placeholder="Payment Description"
-    />
+    <div @click="$router.go(-1)" class="closeModal"></div>
+    <input v-model="category" :class="{ error: !this.category }" class="form-input description" type="text"
+      placeholder="Payment Description" />
 
-    <input
-      v-model="value"
-      :class="{ error: !this.value }"
-      class="form-input amount"
-      type="text"
-      placeholder="Payment Amount"
-    />
+    <input v-model="value" :class="{ error: !this.value }" class="form-input amount" type="text"
+      placeholder="Payment Amount" />
 
-    <input
-      v-model="date"
-      :class="{ error: !this.date }"
-      class="form-input date"
-      type="text"
-      placeholder="Payment Date"
-    />
+    <input v-model="date" :class="{ error: !this.date }" class="form-input date" type="text"
+      placeholder="Payment Date" />
     <div class="btns-form">
       <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
       <div v-if="mode === 'add'" @click="submitData" class="btn">ADD +</div>
     </div>
-
+    <<<<<<< HEAD=======>>>>>>> main
   </div>
 </template>
 
 <script>
 export default {
   name: "Form",
-  props: {
-    to: Number,
-  },
+
   data() {
-    // console.log(this.$route.params.category);
+    // console.log(this.$route);
     // console.log(this.$route.fullPath);
     // console.log(this.$route.name);
     return {
@@ -50,7 +31,6 @@ export default {
       date: this.$route.query.date || new Date().toLocaleDateString(),
       error: false,
       mode: this.$route.params.mode
-
     };
   },
 
@@ -71,21 +51,20 @@ export default {
         this.date = "";
       }
     },
-    onEditClick(){
+    onEditClick() {
       this.$store.commit("editCostsList", {
-          id: +this.$route.query.id,
-          date: this.date,
-          category: this.category,
-          value: this.value,
-        })
+        id: +this.$route.query.id,
+        date: this.date,
+        category: this.category,
+        value: this.value,
+      })
     }
   },
-
-  computed: {
-    isPopupActive() {
-      return this.$store.getters.getIsPopupActive;
-    },
-  },
+  // computed: {
+  //   isPopupActive() {
+  //     return this.$store.getters.getIsPopupActive;
+  //   },
+  // },
 };
 </script>
 
@@ -154,13 +133,13 @@ export default {
   transform: rotate(-45deg);
 }
 
-  .btns-form{
-    width:300px; 
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-  }
+.btns-form {
+  width: 300px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .btn {
   margin-top: 20px;
@@ -178,5 +157,6 @@ export default {
     background-color: transparent;
     color: cadetblue;
   }
+
 }
 </style>
