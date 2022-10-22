@@ -60,6 +60,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -93,6 +94,7 @@ export default {
     border: 2px solid rgb(240, 193, 74);
   }
 }
+
 .router-link {
   text-decoration: none;
 }

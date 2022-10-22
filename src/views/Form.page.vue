@@ -30,6 +30,7 @@
       <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
       <div v-if="mode === 'add'" @click="submitData" class="btn">ADD +</div>
     </div>
+
   </div>
 </template>
 
@@ -49,6 +50,7 @@ export default {
       date: this.$route.query.date || new Date().toLocaleDateString(),
       error: false,
       mode: this.$route.params.mode
+
     };
   },
 
@@ -69,7 +71,6 @@ export default {
         this.date = "";
       }
     },
-
     onEditClick(){
       this.$store.commit("editCostsList", {
           id: +this.$route.query.id,
@@ -152,6 +153,7 @@ export default {
 .closeModal::after {
   transform: rotate(-45deg);
 }
+
   .btns-form{
     width:300px; 
     display: flex;
@@ -176,7 +178,5 @@ export default {
     background-color: transparent;
     color: cadetblue;
   }
-
-
 }
 </style>

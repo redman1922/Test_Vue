@@ -1,4 +1,5 @@
 <template>
+
   <div class="form" v-if="isPopupActive">
     <div @click="closeBtnClick" class="closeModal"></div>
     <input
@@ -87,6 +88,7 @@ export default {
   flex-direction: column;
 
   &-input {
+
     width: 80%;
     height: 40px;
     border: none;
@@ -94,6 +96,7 @@ export default {
     padding: 0;
     margin: 10px 0;
     outline: none;
+
   }
 }
 
@@ -153,3 +156,4 @@ export default {
   }
 }
 </style>
+

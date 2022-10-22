@@ -1,5 +1,7 @@
 {
+
   "name": "personal-costs",
+
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,6 +9,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+
     "core-js": "^3.25.5",
     "vue": "^2.7.10",
     "vue-router": "^3.6.5",
@@ -26,4 +29,5 @@
     "last 2 versions",
     "not dead"
   ]
+
 }

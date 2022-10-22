@@ -11,6 +11,7 @@ const routes = [
     component: HomeView,
   },
   {
+
     path: "/:mode/payment/:category?",
     name: "form",
     component: () => import("../views/Form.page.vue"),
@@ -21,6 +22,7 @@ const routes = [
   //   name: "EditForm",
   //   component: () => import("../views/Form.page.vue"),
   // },
+
 ];
 
 const router = new VueRouter({

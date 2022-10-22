@@ -1,4 +1,5 @@
 <template>
+
   <ul class="costs-list">
     <div class="costs-list__title">
       <span>#</span>
@@ -90,11 +91,13 @@ export default {
   flex-direction: column;
 
   &__item {
+
     height: 50px;
     border-bottom: 1px solid #000;
     display: flex;
     justify-content: space-around;
     align-items: center;
+
   }
 
   &__title {
@@ -126,3 +129,4 @@ export default {
   cursor: pointer;
 }
 </style>
+

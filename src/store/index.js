@@ -1,3 +1,4 @@
+
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -5,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   // хранилище данных
+
   state: {
     costsData: [],
     currentPage: 1,
@@ -15,6 +17,7 @@ export default new Vuex.Store({
 
   // для вычисления производного состояния на основе состояния хранилища
   // для получения данных из хранилища
+
   getters: {
     getCostsList: state => {
       return state.costsData;
