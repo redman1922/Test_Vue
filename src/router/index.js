@@ -11,10 +11,18 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/add/payment/:category?",
+
+    path: "/:mode/payment/:category?",
     name: "form",
     component: () => import("../views/Form.page.vue"),
   },
+
+  // {
+  //   path: "/edit/payment/:category?",
+  //   name: "EditForm",
+  //   component: () => import("../views/Form.page.vue"),
+  // },
+
 ];
 
 const router = new VueRouter({

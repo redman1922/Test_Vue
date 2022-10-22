@@ -1,66 +1,56 @@
 <template>
-
-  <div class="form" v-if="isPopupActive">
-    <div @click="closeBtnClick" class="closeModal"></div>
-    <input
-      v-model="category"
-      :class="{ error: !this.category }"
-      class="form-input description"
-      type="text"
-      placeholder="Payment Description"
-    />
-
-    <input
-      v-model="value"
-      :class="{ error: !this.value }"
-      class="form-input amount"
-      type="text"
-      placeholder="Payment Amount"
-    />
-
-    <input
-      v-model="date"
-      :class="{ error: !this.date }"
-      class="form-input date"
-      type="text"
-      placeholder="Payment Date"
-    />
-
-    <div @click="submitData" class="btn">ADD +</div>
+  <div class="form" v-if="isShown" :style="{top: y + 'px', left: x + 'px'}">
+    <div @click="onCloseClick" class="closeModal"></div>
+    <span @click="onEditClick">Редактировать</span>
+    <span @click="removeCosts">Удалить</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Form",
-
+  name: "ContextMenu",
   data() {
     return {
-      category: "",
-      value: "",
-      date: "",
-      error: false,
+      isShown: false,
+      cost: undefined,
+      x: undefined,
+      y: undefined
     };
   },
 
   methods: {
-    // closeBtnClick() {
-    //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
-    // },
-
-    submitData() {
-      if (this.category && this.date && this.value) {
-        this.$store.commit("addCostsList", {
-          id: this.$store.getters.getMaxId + 1,
-          date: this.date,
-          category: this.category,
-          value: this.value,
-        });
-        this.category = "";
-        this.value = "";
-        this.date = "";
-      }
+    show({ x, y, cost }) {
+      this.isShown = true;
+      this.cost = cost;
+      this.x = x;
+      this.y = y
     },
+
+    hide() {
+      this.isShown = false;
+    },
+
+    onCloseClick() {
+      this.$context.hide();
+    },
+
+    onEditClick() {
+      this.$router.push(`/edit/payment/${this.cost.category}?value=${this.cost.value}&date=${this.cost.date}&id=${this.cost.id}`)
+      this.$context.hide();
+    },
+
+    removeCosts() {
+      if (this.cost !== undefined) {
+        this.$store.commit("removeCostsList", this.cost)
+      }
+
+      this.$context.hide();
+    },
+  },
+
+  mounted() {
+    this.$context.EventEmitter.$on("showContextMenu", this.show);
+    this.$context.EventEmitter.$on("hideContextMenu", this.hide);
   },
 
   computed: {
@@ -74,11 +64,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .form {
-  width: 400px;
-  height: 300px;
-  position: absolute;
-  top: 300px;
-  left: calc(55% - 300px);
+  width: 200px;
+  height: 150px;
+  position: fixed;
   background-color: white;
   border: 1px solid cadetblue;
   border-radius: 9px;
@@ -88,7 +76,6 @@ export default {
   flex-direction: column;
 
   &-input {
-
     width: 80%;
     height: 40px;
     border: none;
@@ -96,7 +83,6 @@ export default {
     padding: 0;
     margin: 10px 0;
     outline: none;
-
   }
 }
 
@@ -156,4 +142,3 @@ export default {
   }
 }
 </style>
-

@@ -26,8 +26,11 @@
       type="text"
       placeholder="Payment Date"
     />
+    <div class="btns-form">
+      <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
+      <div v-if="mode === 'add'" @click="submitData" class="btn">ADD +</div>
+    </div>
 
-    <div @click="submitData" class="btn">ADD +</div>
   </div>
 </template>
 
@@ -38,21 +41,20 @@ export default {
     to: Number,
   },
   data() {
-    console.log(this.$route.params.category);
+    // console.log(this.$route.params.category);
+    // console.log(this.$route.fullPath);
+    // console.log(this.$route.name);
     return {
       category: this.$route.params.category,
       value: this.$route.query.value,
-      date: new Date().toLocaleDateString(),
+      date: this.$route.query.date || new Date().toLocaleDateString(),
       error: false,
+      mode: this.$route.params.mode
+
     };
   },
 
   methods: {
-    // closeBtnClick() {
-
-    //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
-    // },
-
     submitData() {
       if (this.category && this.date && this.value) {
         // this.category = this.$route.params.category;
@@ -69,6 +71,14 @@ export default {
         this.date = "";
       }
     },
+    onEditClick(){
+      this.$store.commit("editCostsList", {
+          id: +this.$route.query.id,
+          date: this.date,
+          category: this.category,
+          value: this.value,
+        })
+    }
   },
 
   computed: {
@@ -144,9 +154,17 @@ export default {
   transform: rotate(-45deg);
 }
 
+  .btns-form{
+    width:300px; 
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 .btn {
   margin-top: 20px;
-  margin-left: 55%;
+
   background-color: cadetblue;
   border: 1px solid cadetblue;
   border-radius: 3px;
