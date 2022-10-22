@@ -33,7 +33,7 @@ export default new Vuex.Store({
     getCurrentPage: state => state.currentPage,
     getMaxId: state =>
       state.costsData.map(({ id }) => id).sort((a, b) => a - b)[
-        state.costsData.length - 1
+      state.costsData.length - 1
       ],
     getChartData: state => {
       let a = undefined;
@@ -77,13 +77,13 @@ export default new Vuex.Store({
     removeCostsList: (state, payload) =>
       state.costsData.splice(state.costsData.indexOf(payload), 1),
     editCostsList: (state, payload) =>
-      (state.costsData = state.costsData.map(cost => {
-        if (cost.id === payload.id) {
-          return payload;
-        } else {
-          return cost;
-        }
-      })),
+    (state.costsData = state.costsData.map(cost => {
+      if (cost.id === payload.id) {
+        return payload;
+      } else {
+        return cost;
+      }
+    })),
   },
 
   // для обмена данными между клиентом-сервером (асинхронных операций)

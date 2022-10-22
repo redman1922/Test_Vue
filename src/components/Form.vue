@@ -1,19 +1,32 @@
 <template>
-  <div class="form">
-    <div @click="$router.go(-1)" class="closeModal"></div>
-    <input v-model="category" :class="{ error: !this.category }" class="form-input description" type="text"
-      placeholder="Payment Description" />
 
-    <input v-model="value" :class="{ error: !this.value }" class="form-input amount" type="text"
-      placeholder="Payment Amount" />
-    <input v-model="date" :class="{ error: !this.date }" class="form-input date" type="text"
-      placeholder="Payment Date" />
-    <div class="btns-form">
-      <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
-      <div v-if="mode === 'add'" ref="getTotalValue" @click="submitData" class="btn">
-        ADD +
-      </div>
-    </div>
+  <div class="form" v-if="isPopupActive">
+    <div @click="closeBtnClick" class="closeModal"></div>
+    <input
+      v-model="category"
+      :class="{ error: !this.category }"
+      class="form-input description"
+      type="text"
+      placeholder="Payment Description"
+    />
+
+    <input
+      v-model="value"
+      :class="{ error: !this.value }"
+      class="form-input amount"
+      type="text"
+      placeholder="Payment Amount"
+    />
+
+    <input
+      v-model="date"
+      :class="{ error: !this.date }"
+      class="form-input date"
+      type="text"
+      placeholder="Payment Date"
+    />
+
+    <div @click="submitData" class="btn">ADD +</div>
   </div>
 </template>
 
@@ -22,50 +35,39 @@ export default {
   name: "Form",
 
   data() {
-    // console.log(this.$route);
-    // console.log(this.$route.fullPath);
-    // console.log(this.$route.name);
     return {
-      category: this.$route.params.category,
-      value: this.$route.query.value,
-      date: this.$route.query.date || new Date().toLocaleDateString(),
+      category: "",
+      value: "",
+      date: "",
       error: false,
-      mode: this.$route.params.mode,
     };
   },
 
   methods: {
+    // closeBtnClick() {
+    //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
+    // },
+
     submitData() {
       if (this.category && this.date && this.value) {
-        // this.category = this.$route.params.category;
-        // this.date = new Date();
-        // this.value = this.$route.params.value;
         this.$store.commit("addCostsList", {
           id: this.$store.getters.getMaxId + 1,
           date: this.date,
           category: this.category,
-          value: +this.value,
+          value: this.value,
         });
         this.category = "";
         this.value = "";
         this.date = "";
       }
     },
-    onEditClick() {
-      this.$store.commit("editCostsList", {
-        id: +this.$route.query.id,
-        date: this.date,
-        category: this.category,
-        value: +this.value,
-      });
-    },
   },
 
-  // computed: {
-  //   isPopupActive() {
-  //     return this.$store.getters.getIsPopupActive;
-  //   },
-  // },
+  computed: {
+    isPopupActive() {
+      return this.$store.getters.getIsPopupActive;
+    },
+  },
 };
 </script>
 
@@ -86,6 +88,7 @@ export default {
   flex-direction: column;
 
   &-input {
+
     width: 80%;
     height: 40px;
     border: none;
@@ -93,6 +96,7 @@ export default {
     padding: 0;
     margin: 10px 0;
     outline: none;
+
   }
 }
 
@@ -134,25 +138,9 @@ export default {
   transform: rotate(-45deg);
 }
 
-.btns-form {
-  width: 300px;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btns-form {
-  width: 300px;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .btn {
   margin-top: 20px;
-
+  margin-left: 55%;
   background-color: cadetblue;
   border: 1px solid cadetblue;
   border-radius: 3px;
@@ -166,6 +154,6 @@ export default {
     background-color: transparent;
     color: cadetblue;
   }
-
 }
 </style>
+

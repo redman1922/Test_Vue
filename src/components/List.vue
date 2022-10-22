@@ -7,8 +7,8 @@
       <span>Value</span>
     </div>
     <li v-for="cost in list" :key="cost.id" class="costs-list__item">
-      <span v-for="(item, idx) in cost" :key="idx" class="row">{{ item }} </span
-      ><span class="dot" @click="callContextMenu($event, cost)" >&#10247;</span> <!-- $event - для определения координат трех точек -->
+      <span v-for="(item, idx) in cost" :key="idx" class="row">{{ item }} </span><span class="dot"
+        @click="callContextMenu($event, cost)">&#10247;</span> <!-- $event - для определения координат трех точек -->
     </li>
     <ContextMenu></ContextMenu>
   </ul>
@@ -26,7 +26,6 @@ export default {
   mounted() {
     this.$store.dispatch("loadCosts", +this.$route.query.page);
     this.$context.EventEmitter.$on("show", this.show);
-  
   },
 
   computed: {
@@ -85,7 +84,7 @@ export default {
   text-decoration: none;
 }
 
-.dot{
+.dot {
   cursor: pointer;
 }
 </style>

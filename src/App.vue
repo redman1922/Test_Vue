@@ -2,31 +2,32 @@
   <div id="app">
     <nav>
       <router-link to="/">
-        <img alt="Vue logo" src="./assets/logo.png"
-      /></router-link>
+        <img alt="Vue logo" src="./assets/logo.png" />
+      </router-link>
     </nav>
     <v-container>
       <v-row>
         <v-col>
-      <h1>My Personal Costs</h1>
-      <router-link to="/add/payment"><AddButton></AddButton></router-link>
-      <nav class="nav-costs">
-        <router-link class="router-link" to="/add/payment/food?value=200"
-          ><a class="btn-costs">Food</a>
-        </router-link>
-        <router-link class="router-link" to="/add/payment/transport?value=50"
-          ><a class="btn-costs">Transport</a>
-        </router-link>
-        <router-link
-          class="router-link"
-          to="/add/payment/entertanment?value=2000"
-          ><a class="btn-costs">Entertainment</a></router-link
-        >
-      </nav>
-      <router-view :key="$route.fullPath" />
-      <List></List></v-col>
-      <v-col><DoughnutChart
-    /></v-col></v-row></v-container>
+          <h1>My Personal Costs</h1>
+          <router-link to="/add/payment">
+            <AddButton></AddButton>
+          </router-link>
+          <nav class="nav-costs">
+            <router-link class="router-link" to="/add/payment/food?value=200"><a class="btn-costs">Food</a>
+            </router-link>
+            <router-link class="router-link" to="/add/payment/transport?value=50"><a class="btn-costs">Transport</a>
+            </router-link>
+            <router-link class="router-link" to="/add/payment/entertanment?value=2000"><a
+                class="btn-costs">Entertainment</a></router-link>
+          </nav>
+          <router-view :key="$route.fullPath" />
+          <List></List>
+        </v-col>
+        <v-col>
+          <DoughnutChart />
+        </v-col>
+      </v-row>
+    </v-container>
     <Pagination v-model="this.$store.currentPage"></Pagination>
   </div>
 </template>
@@ -84,6 +85,7 @@ export default {
     color: #42b983;
   }
 }
+
 .btn-costs {
   border: 2px solid cadetblue;
   border-radius: 5px;
@@ -99,6 +101,7 @@ export default {
     border: 2px solid rgb(240, 193, 74);
   }
 }
+
 .router-link {
   text-decoration: none;
 }
