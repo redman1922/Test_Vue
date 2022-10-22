@@ -5,21 +5,29 @@
         <img alt="Vue logo" src="./assets/logo.png" />
       </router-link>
     </nav>
-
-    <h1>My Personal Costs</h1>
-    <router-link to="/add/payment">
-      <AddButton></AddButton>
-    </router-link>
-    <nav class="nav-costs">
-      <router-link class="router-link" to="/add/payment/food?value=200"><a class="btn-costs">Food</a>
-      </router-link>
-      <router-link class="router-link" to="/add/payment/transport?value=50"><a class="btn-costs">Transport</a>
-      </router-link>
-      <router-link class="router-link" to="/add/payment/entertanment?value=2000"><a class="btn-costs">Entertainment</a>
-      </router-link>
-    </nav>
-    <router-view :key="$route.fullPath" />
-    <List></List>
+    <v-container>
+      <v-row>
+        <v-col>
+          <h1>My Personal Costs</h1>
+          <router-link to="/add/payment">
+            <AddButton></AddButton>
+          </router-link>
+          <nav class="nav-costs">
+            <router-link class="router-link" to="/add/payment/food?value=200"><a class="btn-costs">Food</a>
+            </router-link>
+            <router-link class="router-link" to="/add/payment/transport?value=50"><a class="btn-costs">Transport</a>
+            </router-link>
+            <router-link class="router-link" to="/add/payment/entertanment?value=2000"><a
+                class="btn-costs">Entertainment</a></router-link>
+          </nav>
+          <router-view :key="$route.fullPath" />
+          <List></List>
+        </v-col>
+        <v-col>
+          <DoughnutChart />
+        </v-col>
+      </v-row>
+    </v-container>
     <Pagination v-model="this.$store.currentPage"></Pagination>
   </div>
 </template>
@@ -28,6 +36,7 @@
 import AddButton from "./components/AddButton.vue";
 import List from "./components/List.vue";
 import Pagination from "./components/Pagination.vue";
+import DoughnutChart from "./components/Doughnut.vue";
 
 export default {
   name: "App",
@@ -35,6 +44,7 @@ export default {
     AddButton,
     List,
     Pagination,
+    DoughnutChart,
   },
   methods: {
     show() {
@@ -43,7 +53,7 @@ export default {
 
     hide() {
       this.isShown = false;
-      console.log("hide")
+      console.log("hide");
     },
     // onBtnClick() {
     //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);

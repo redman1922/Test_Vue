@@ -6,14 +6,14 @@
 
     <input v-model="value" :class="{ error: !this.value }" class="form-input amount" type="text"
       placeholder="Payment Amount" />
-
     <input v-model="date" :class="{ error: !this.date }" class="form-input date" type="text"
       placeholder="Payment Date" />
     <div class="btns-form">
       <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
-      <div v-if="mode === 'add'" @click="submitData" class="btn">ADD +</div>
+      <div v-if="mode === 'add'" ref="getTotalValue" @click="submitData" class="btn">
+        ADD +
+      </div>
     </div>
-    <<<<<<< HEAD=======>>>>>>> main
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
       value: this.$route.query.value,
       date: this.$route.query.date || new Date().toLocaleDateString(),
       error: false,
-      mode: this.$route.params.mode
+      mode: this.$route.params.mode,
     };
   },
 
@@ -44,7 +44,7 @@ export default {
           id: this.$store.getters.getMaxId + 1,
           date: this.date,
           category: this.category,
-          value: this.value,
+          value: +this.value,
         });
         this.category = "";
         this.value = "";
@@ -56,10 +56,11 @@ export default {
         id: +this.$route.query.id,
         date: this.date,
         category: this.category,
-        value: this.value,
-      })
-    }
+        value: +this.value,
+      });
+    },
   },
+
   // computed: {
   //   isPopupActive() {
   //     return this.$store.getters.getIsPopupActive;
@@ -131,6 +132,14 @@ export default {
 
 .closeModal::after {
   transform: rotate(-45deg);
+}
+
+.btns-form {
+  width: 300px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btns-form {

@@ -35,6 +35,38 @@ export default new Vuex.Store({
       state.costsData.map(({ id }) => id).sort((a, b) => a - b)[
       state.costsData.length - 1
       ],
+    getChartData: state => {
+      let a = undefined;
+      a = state.costsData.reduce((acc, cost) => {
+        console.log(acc);
+        acc[cost.category] =
+          acc[cost.category] === undefined
+            ? cost.value
+            : acc[cost.category] + cost.value;
+        // const costCateg = cost.category;
+        // const same = acc.find(element => element.category === costCateg);
+        // if (same !== undefined) same.value += cost.value;
+        // else acc.push(cost);
+        return acc;
+      }, {});
+
+      return {
+        labels: Object.keys(a),
+        datasets: [
+          {
+            data: Object.values(a),
+            backgroundColor: [
+              "#41B883",
+              "#E46651",
+              "#00D8FF",
+              "#DD1B16",
+              "#DD1654",
+              "#DD1744",
+            ],
+          },
+        ],
+      };
+    },
   },
 
   //для изменения данных в state
@@ -42,17 +74,16 @@ export default new Vuex.Store({
     setCostsList: (state, payload) => (state.costsData = payload),
     addCostsList: (state, payload) => state.costsData.push(payload),
     setCurrentPage: (state, payload) => (state.currentPage = payload),
-    removeCostsList: (state, payload) => state.costsData.splice(
-      state.costsData.indexOf(payload),
-      1
-    ),
-    editCostsList: (state, payload) => (state.costsData = state.costsData.map((cost) => {
+    removeCostsList: (state, payload) =>
+      state.costsData.splice(state.costsData.indexOf(payload), 1),
+    editCostsList: (state, payload) =>
+    (state.costsData = state.costsData.map(cost => {
       if (cost.id === payload.id) {
         return payload;
       } else {
-        return cost
+        return cost;
       }
-    }))
+    })),
   },
 
   // для обмена данными между клиентом-сервером (асинхронных операций)

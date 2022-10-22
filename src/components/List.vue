@@ -26,7 +26,6 @@ export default {
   mounted() {
     this.$store.dispatch("loadCosts", +this.$route.query.page);
     this.$context.EventEmitter.$on("show", this.show);
-
   },
 
   computed: {
