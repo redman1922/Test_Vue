@@ -23,7 +23,9 @@
       ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
-    "modulePathIgnorePatterns": ["<rootDir>/dist/"]
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ]
   },
   "dependencies": {
     "core-js": "^3.8.3",

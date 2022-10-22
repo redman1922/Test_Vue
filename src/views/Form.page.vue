@@ -1,33 +1,19 @@
 <template>
   <div class="form">
     <div @click="$router.go(-1)" class="closeModal"></div>
-    <input
-      v-model="category"
-      :class="{ error: !this.category }"
-      class="form-input description"
-      type="text"
-      placeholder="Payment Description"
-    />
+    <input v-model="category" :class="{ error: !this.category }" class="form-input description" type="text"
+      placeholder="Payment Description" />
 
-    <input
-      v-model="value"
-      :class="{ error: !this.value }"
-      class="form-input amount"
-      type="text"
-      placeholder="Payment Amount"
-    />
+    <input v-model="value" :class="{ error: !this.value }" class="form-input amount" type="text"
+      placeholder="Payment Amount" />
 
-    <input
-      v-model="date"
-      :class="{ error: !this.date }"
-      class="form-input date"
-      type="text"
-      placeholder="Payment Date"
-    />
+    <input v-model="date" :class="{ error: !this.date }" class="form-input date" type="text"
+      placeholder="Payment Date" />
     <div class="btns-form">
       <div v-if="mode === 'edit'" @click="onEditClick" class="btn">EDIT</div>
       <div v-if="mode === 'add'" @click="submitData" class="btn">ADD +</div>
     </div>
+    <<<<<<< HEAD=======>>>>>>> main
   </div>
 </template>
 
@@ -65,17 +51,15 @@ export default {
         this.date = "";
       }
     },
-
-    onEditClick(){
+    onEditClick() {
       this.$store.commit("editCostsList", {
-          id: +this.$route.query.id,
-          date: this.date,
-          category: this.category,
-          value: this.value,
-        })
+        id: +this.$route.query.id,
+        date: this.date,
+        category: this.category,
+        value: this.value,
+      })
     }
   },
-
   // computed: {
   //   isPopupActive() {
   //     return this.$store.getters.getIsPopupActive;
@@ -148,13 +132,14 @@ export default {
 .closeModal::after {
   transform: rotate(-45deg);
 }
-  .btns-form{
-    width:300px; 
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-  }
+
+.btns-form {
+  width: 300px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .btn {
   margin-top: 20px;
@@ -172,7 +157,6 @@ export default {
     background-color: transparent;
     color: cadetblue;
   }
-
 
 }
 </style>

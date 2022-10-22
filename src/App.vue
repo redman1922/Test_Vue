@@ -2,22 +2,21 @@
   <div id="app">
     <nav>
       <router-link to="/">
-        <img alt="Vue logo" src="./assets/logo.png"
-      /></router-link>
+        <img alt="Vue logo" src="./assets/logo.png" />
+      </router-link>
     </nav>
 
     <h1>My Personal Costs</h1>
-    <router-link to="/add/payment"><AddButton></AddButton></router-link>
+    <router-link to="/add/payment">
+      <AddButton></AddButton>
+    </router-link>
     <nav class="nav-costs">
-      <router-link class="router-link" to="/add/payment/food?value=200"
-        ><a class="btn-costs">Food</a>
+      <router-link class="router-link" to="/add/payment/food?value=200"><a class="btn-costs">Food</a>
       </router-link>
-      <router-link class="router-link" to="/add/payment/transport?value=50"
-        ><a class="btn-costs">Transport</a>
+      <router-link class="router-link" to="/add/payment/transport?value=50"><a class="btn-costs">Transport</a>
       </router-link>
-      <router-link class="router-link" to="/add/payment/entertanment?value=2000"
-        ><a class="btn-costs">Entertainment</a></router-link
-      >
+      <router-link class="router-link" to="/add/payment/entertanment?value=2000"><a class="btn-costs">Entertainment</a>
+      </router-link>
     </nav>
     <router-view :key="$route.fullPath" />
     <List></List>
@@ -38,7 +37,7 @@ export default {
     Pagination,
   },
   methods: {
-        show() {
+    show() {
       this.isShown = true;
     },
 
@@ -50,7 +49,7 @@ export default {
     //   this.$store.commit("setIsPopupActive", !this.$store.state.isPopupActive);
     // },
   },
-    mounted() {
+  mounted() {
     this.$context.EventEmitter.$on("show", this.show);
     this.$context.EventEmitter.$on("hide", this.hide);
   },
@@ -76,6 +75,7 @@ export default {
     color: #42b983;
   }
 }
+
 .btn-costs {
   border: 2px solid cadetblue;
   border-radius: 5px;
@@ -91,6 +91,7 @@ export default {
     border: 2px solid rgb(240, 193, 74);
   }
 }
+
 .router-link {
   text-decoration: none;
 }

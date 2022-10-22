@@ -1,7 +1,7 @@
 <template>
   <div class="form" v-if="isShown" :style="{top: y + 'px', left: x + 'px'}">
     <div @click="onCloseClick" class="closeModal"></div>
-    <span @click="onEditClick" >&#128393;Редактировать</span>
+    <span @click="onEditClick">&#128393;Редактировать</span>
     <span @click="removeCosts">&#128722; Удалить</span>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   },
 
   methods: {
-    show({x, y, cost}) {
+    show({ x, y, cost }) {
       this.isShown = true;
       this.cost = cost;
       this.x = x;
@@ -34,7 +34,7 @@ export default {
       this.$context.hide();
     },
 
-    onEditClick(){
+    onEditClick() {
       this.$router.push(`/edit/payment/${this.cost.category}?value=${this.cost.value}&date=${this.cost.date}&id=${this.cost.id}`)
       this.$context.hide();
     },

@@ -33,7 +33,7 @@ export default new Vuex.Store({
     getCurrentPage: state => state.currentPage,
     getMaxId: state =>
       state.costsData.map(({ id }) => id).sort((a, b) => a - b)[
-        state.costsData.length - 1
+      state.costsData.length - 1
       ],
   },
 
@@ -47,9 +47,9 @@ export default new Vuex.Store({
       1
     ),
     editCostsList: (state, payload) => (state.costsData = state.costsData.map((cost) => {
-      if(cost.id === payload.id){
+      if (cost.id === payload.id) {
         return payload;
-      } else{
+      } else {
         return cost
       }
     }))
